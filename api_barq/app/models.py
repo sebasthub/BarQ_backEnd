@@ -7,3 +7,6 @@ class Produto(models.Model):
     preco = models.FloatField()
     promocao = models.IntegerField()
 
+    def __str__(self) -> str:
+        return self.nome
+
