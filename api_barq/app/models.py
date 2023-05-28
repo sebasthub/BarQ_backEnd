@@ -4,12 +4,18 @@ class Categoria(models.Model):
     nome = models.CharField(max_length=50)
     imagem = models.CharField(max_length=5000)
 
+    def __str__(self) -> str:
+        return self.nome
+
 class Estabelecimento(models.Model):
     nome = models.CharField(max_length=50)
     endereco = models.CharField(max_length=500)
     usuario = models.CharField(max_length=50)
     senha = models.CharField(max_length=12)
     email = models.EmailField(max_length=254)
+
+    def __str__(self) -> str:
+        return self.nome
 
 class Produto(models.Model):
     nome = models.CharField(max_length=300)
@@ -31,10 +37,16 @@ class Consumidor(models.Model):
     mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE)
     valido_ate = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self) -> str:
+        return self.nome
+
 class Pedido(models.Model):
     consumidor = models.ForeignKey(Consumidor, on_delete=models.CASCADE)
     status = models.BooleanField()
     total = models.FloatField()
+
+    def __str__(self) -> str:
+        return self.consumidor
 
 class Pedido_produto(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
