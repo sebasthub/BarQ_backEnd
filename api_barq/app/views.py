@@ -36,10 +36,28 @@ class MesaList(generics.ListCreateAPIView):
     queryset = Mesa.objects.all()
     serializer_class = MesaSerializer
 
+    @api_view(['GET'])
+    def get_by_id(request,pk):
+        mesa = Mesa.objects.get(id = pk)
+        serializer = MesaSerializer(mesa, many = False)
+        return Response(serializer.data)
+
 class ConsumidorList(generics.ListCreateAPIView):
     queryset = Consumidor.objects.all()
     serializer_class = ConsumidorSerializer
 
+    @api_view(['GET'])
+    def get_by_id(request,pk):
+        consumidor = Consumidor.objects.get(id = pk)
+        serializer = ConsumidorSerializer(consumidor, many = False)
+        return Response(serializer.data)
+
 class PedidoList(generics.ListCreateAPIView):
     queryset = Pedido.objects.all()
     serializer_class = PedidoSerializer
+
+    @api_view(['GET'])
+    def get_by_id(request,pk):
+        pedido = Pedido.objects.get(id = pk)
+        serializer = PedidoSerializer(pedido, many = False)
+        return Response(serializer.data)
