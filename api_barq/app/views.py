@@ -4,17 +4,6 @@ from app.serializers import ProdutoSerializer,CategoriaSerializer,Estabeleciment
 from rest_framework.response import Response
 from rest_framework import generics
 
-@api_view(['GET'])
-def produtos_list(request):
-    produtos = Produto.objects.all()
-    serializer = ProdutoSerializer(produtos,many = True)
-    return Response(serializer.data)
-
-@api_view(['GET'])
-def produtos_get_by_id(request,pk):
-    produtos = Produto.objects.get(id = pk)
-    serializer = ProdutoSerializer(produtos,many = False)
-    return Response(serializer.data)
 
 @api_view(['GET'])
 def categorias_list(request):
@@ -27,6 +16,15 @@ def categorias_get_by_id(request,pk):
     categorias = Categoria.objects.get(id = pk)
     serializer = CategoriaSerializer(categorias,many = False)
     return Response(serializer.data)
+
+class ProdutoList(generics.ListCreateAPIView):
+    queryset = Produto.objects.all()
+    serializer_class = ProdutoSerializer
+    @api_view(['GET'])
+    def get_by_id(request,pk):
+        produtos = Produto.objects.get(id = pk)
+        serializer = ProdutoSerializer(produtos,many = False)
+        return Response(serializer.data)
 
 class EstabelecimentoList(generics.ListCreateAPIView):
     queryset = Estabelecimento.objects.all()
