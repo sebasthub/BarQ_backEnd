@@ -29,6 +29,11 @@ class ProdutoList(generics.ListCreateAPIView):
 class EstabelecimentoList(generics.ListCreateAPIView):
     queryset = Estabelecimento.objects.all()
     serializer_class = EstabelecimentoSerializer
+    @api_view(['GET'])
+    def get_by_id(request,pk):
+        estabelecimento = Estabelecimento.objects.get(id = pk)
+        serializer = EstabelecimentoSerializer(estabelecimento,many = False)
+        return Response(serializer.data)
 
 class MesaList(generics.ListCreateAPIView):
     queryset = Mesa.objects.all()

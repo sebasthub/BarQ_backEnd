@@ -23,7 +23,7 @@ class Produto(models.Model):
     imagem = models.CharField(max_length=5000)
     preco = models.FloatField()
     promocao = models.IntegerField()
-    Estabelecimento = models.ForeignKey(Estabelecimento, on_delete=models.CASCADE)
+    estabelecimento = models.ForeignKey(Estabelecimento, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
@@ -46,7 +46,7 @@ class Pedido(models.Model):
     total = models.FloatField()
 
     def __str__(self) -> str:
-        return self.consumidor
+        return self.consumidor.nome
 
 class Pedido_produto(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
