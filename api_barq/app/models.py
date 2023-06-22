@@ -44,10 +44,7 @@ class Pedido(models.Model):
     consumidor = models.ForeignKey(Consumidor, on_delete=models.CASCADE)
     status = models.BooleanField()
     total = models.FloatField()
+    produtos = models.ManyToManyField(Produto, related_name='pedidos')
 
     def __str__(self) -> str:
         return self.consumidor.nome
-
-class Pedido_produto(models.Model):
-    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
-    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)

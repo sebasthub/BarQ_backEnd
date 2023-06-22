@@ -1,7 +1,7 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
 from rest_framework import status
-from .models import Estabelecimento,Mesa, Categoria, Consumidor
+from .models import Estabelecimento,Mesa, Categoria, Consumidor, Produto
 from django.urls import reverse
 import pdb
 
@@ -118,12 +118,14 @@ class PedidoAPITestCase(TestCase):
         estabelecimento = insert_estabelecimento()
         mesa = insert_mesa(estabelecimento)
         consumidor = insert_consumidor(mesa)
+        insert_produto()
         self.client = APIClient()
         self.url = reverse('pedido')
         self.produto_data = {
             "consumidor": consumidor.pk,
             "status": 'false',
-            "total": 50.00
+            "total": 50.00,
+            "produtos": [1,1]
         }
 
     def test_create_pedido(self):
@@ -169,3 +171,15 @@ def insert_consumidor(mesa: Mesa):
     consumidor.mesa = mesa
     consumidor.save()
     return consumidor
+
+def insert_produto():
+    produto = Produto()
+    produto.categoria = insert_categoria()
+    produto.estabelecimento = insert_estabelecimento()
+    produto.nome = 'produto'
+    produto.descricao = 'produto'
+    produto.preco = 10.40
+    produto.promocao = 0
+    produto.imagem = ''
+    produto.save()
+    return produto

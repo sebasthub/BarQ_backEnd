@@ -4,31 +4,31 @@ from rest_framework import serializers
 class ProdutoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Produto
-        fields =  ['id','nome','descricao','preco','promocao','imagem','estabelecimento','categoria']
+        fields =  '__all__'
 
 
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categoria
-        fields =  ['id','nome',]
+        fields =  '__all__'
 
 
 class EstabelecimentoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estabelecimento
-        fields =  ['id','nome','endereco','usuario',"senha","email",]
+        fields =  '__all__'
 
 class MesaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mesa
-        fields =  ['id','estabelecimento',]
+        fields =  '__all__'
 
 class ConsumidorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Consumidor
-        fields =  ['id','nome','mesa','valido_ate']
+        fields =  '__all__'
 
 class PedidoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
-        fields =  ['id','consumidor','status','total']
+        fields =  '__all__'
